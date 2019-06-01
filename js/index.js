@@ -3,8 +3,10 @@ $(function () {
   nav();
   goodsList();
 
-})
 
+
+})
+// 生成首页动态轮播图
 function banner() {
     //动态生成轮播图结构
     $.ajax({
@@ -28,9 +30,12 @@ function banner() {
           });
         }
       }
+
     })
 }
 
+//这个是四个图片 分类 秒杀拍 超市购 母婴品
+// 获取首页分类菜单数据
 function nav() {
   $.ajax({
     type: 'get',
@@ -46,14 +51,14 @@ function nav() {
   })
 }
 
-// 数据列表
+//// 生成首页商品列表
 function goodsList() {
   $.ajax({
     type: 'get',
     url: '/home/goodslist',
     dataType: 'json',
     success: function (result) {
-      console.log(result)
+      // console.log(result)
       var html = template('prolistTemp', result)
       $('.pyg_goodsList').html(html)
     }

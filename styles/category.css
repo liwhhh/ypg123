@@ -110,7 +110,6 @@ ul {
 }
 .pyg_header {
   height: 45px;
-  background-color: #fff;
   padding: 4px;
 }
 .pyg_content {
@@ -120,57 +119,61 @@ ul {
 .pyg_footer {
   height: 50px;
 }
-.pyg_nav {
-  padding: 15px;
+.loadding::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: .5;
+  content: "";
+  z-index: 100;
+}
+.loadding::after {
+  font: normal normal normal 14px/1 FontAwesome;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  margin-left: -50px;
+  font-size: 100px;
+  color: #0094ff;
+  content: "\f013";
+  z-index: 101;
+  animation: fa-spin 1s infinite linear;
+}
+.pyg_content {
   display: flex;
-  background-color: #fff;
 }
-.pyg_nav > a {
-  flex: 1;
-  display: inline-block;
+.pyg_content > .left {
+  width: 100px;
+  overflow: scroll;
+}
+.pyg_content > .left > ul {
+  width: 100%;
+}
+.pyg_content > .left > ul > li {
+  height: 50px;
+  width: 100%;
+}
+.pyg_content > .left > ul > li > a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  line-height: 50px;
   text-align: center;
-}
-.pyg_nav > a img {
-  width: 70%;
-  justify-content: space-evenly;
-}
-.pyg_goodsList {
-  padding: 10px;
-}
-.pyg_goodsList .pyg_pbox {
-  width: 100%;
-}
-.pyg_goodsList .pyg_pbox > img {
-  width: 100%;
-  display: block;
-  margin: 5px 0;
-}
-.pyg_goodsList .pyg_pbox > .pyg_sbox {
-  width: 49%;
-  margin-top: 10px;
-  float: left;
-  background-color: #fff;
-}
-.pyg_goodsList .pyg_pbox > .pyg_sbox > .pyg_good {
-  width: 100%;
-}
-.pyg_goodsList .pyg_pbox > .pyg_sbox > .pyg_good > img {
-  width: 100%;
-  display: block;
-  margin: 5px 0;
-}
-.pyg_goodsList .pyg_pbox > .pyg_sbox > .pyg_good > .pyg_desc {
+  background-color: #eee;
+  border-bottom: 1px solid #888;
+  border-right: 1px solid #888;
+  font-size: 13px;
   color: #333;
-  font-size: 12px;
 }
-.pyg_goodsList .pyg_pbox > .pyg_sbox > .pyg_good > .pyg_price {
+.pyg_content > .left > ul > li.active > a {
   color: red;
+  background-color: #fff;
+  border-right: none;
 }
-.pyg_goodsList .pyg_pbox > .pyg_sbox > .pyg_btncate {
-  width: 80%;
-  display: block;
-  margin: 0 auto;
-}
-.pyg_goodsList .pyg_pbox > .pyg_sbox:nth-of-type(even) {
-  margin-left: 2%;
+.pyg_content > .right {
+  flex: 1;
+  background-color: pink;
 }
