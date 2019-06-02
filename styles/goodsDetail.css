@@ -41,6 +41,13 @@
   z-index: 101;
   animation: fa-spin 1s infinite linear;
 }
+.line1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal!important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+}
 html,
 body,
 div,
@@ -149,7 +156,7 @@ ul {
 }
 .pyg_content .mui-scroll-wrapper {
   top: 45px;
-  bottom: 30px;
+  bottom: 10px;
 }
 .pyg_content .mui-scroll-wrapper .goodsName {
   padding: 5px 10px;

@@ -12,7 +12,12 @@ $(function () {
     data: $.getParameter(location.search),
     dataType: 'json',
     success: function (result) {
-      
+      console.log(result)
+      var html = template('gdTemp', result.message)
+      $('.mui-scroll').html(html)
+      mui('.mui-slider').slider({
+        interval: 2000
+      });
     }
   })
 
