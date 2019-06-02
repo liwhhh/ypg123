@@ -10,13 +10,14 @@ $(function () {
   var cateData
   
   // 创建渲染函数,实现数据的动态渲染
+  // 判断缓存数据是否存在且有效,如果有效则直接使用缓存,如果无效则发送请求
   function render() {
     // 获取本地数据.判断是否超时,如果没有超时就直接使用本地数据进行数据结构的动态渲染
    cateData = JSON.parse(localStorage.getItem('pyg_cateData'))
     if (cateData && Date.now() - cateData.time < 24 * 60 * 60 * 1000) {
       // 使用 本地存储进行数据的渲染
       leftCateList()
-      rightCateList()
+      rightCateList(0);//默认0
      
     }
      // 如果超时,则再次发起ajax请求
@@ -35,6 +36,7 @@ $(function () {
   //   }
   // })
   function getCateList() {
+    $('body').addClass('loadding')
     $.get('/categories', function (result) {
       // console.log(result)
       // $(document.body).append(response)
@@ -73,6 +75,9 @@ $(function () {
         // 找到点击的这个添加这个active类.所有兄弟移出这个active类
         $(this).addClass('active').siblings().removeClass('active')
         myScroll.scrollToElement(this)
+        //动态渲染二级分类数据  //添加这个就会触发右边的索引值
+        var index = $(this).index(); //左边的这个所有给右边
+        rightCateList(index)
       })
 
     }
@@ -81,7 +86,22 @@ $(function () {
   function rightCateList(index) {
     console.log(cateData.list[index])
     var html = template('rightListTemp', cateData.list[index])
-    $('.right').html(html);//动态生成之后
+    $('.rightList').html(html);//动态生成之后
+
+    // 获取img的数条长度
+    var imgcount = $('.rightList img').length
+    console.log(imgcount)
+    // 触发加载事件
+    $('.rightList img').on('load', function () {
+      imgcount--;
+      // 如果图片加载完成后就执行
+      if (imgcount == 0) {
+        $('body').removeClass('loadding')
+        // 使用iscroll实现滑动效果
+        var iscroll = new IScroll('.right');
+      }
+    })
+
    }
 
 
