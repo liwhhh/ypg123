@@ -19,4 +19,28 @@ $(function () {
   $.ajaxSettings.complete = function () {
     $('body').removeClass('loadding')
   }
+  
+
+  // 动态扩展zepto中的成员
+  $.extend($, {
+    getParameter: function (url) {
+      var obj = {}
+      // loaction.search:url中?及?后面的内容
+      url = url.substring(1)//cid=5&name=jack
+      // 先按&拆分
+      var arr = url.split('&')//['cid=5','name=jack']
+      // 遍历进行第二次拆分
+      for (var i = 0; i < arr.length; i++){
+        var temp = arr[i].split('=')//['cid',5]
+        obj[temp[0]]=temp[1] //obj['cid']=5
+        
+      }
+      return obj
+    }
+  })
+
+
+
+
+
 })
