@@ -10,9 +10,15 @@ $(function () {
   // 添加zepto拦截器:它的作用是可以让每个ajax请求都经过这个函数进行处理
   // beforeSend:每次发送ajax请求都必须经过的处理函数
   $.ajaxSettings.beforeSend = function (xhr, obj) {
-    $('body').addClass('loading')
+    $('body').addClass('loadding')
     // 在这里拼接url
-    obj.url=baseURL+ obj.url
+    obj.url = baseURL + obj.url
+    
+      //在访问私有路径的时候, 手动的将tokenhi传递给服务器
+    // 值如何传递:通过请求头的方式token传递给服务器
+    if (obj.url.indexOf('/my/') != -1) { //私有路径传递这个值
+      xhr.setRequestHeader('Authorization',sessionStorage.getItem('pyg_token'))
+    }
     
   }
   // complete:请求完成时触发
@@ -30,14 +36,14 @@ $(function () {
       // 先按&拆分
       var arr = url.split('&')//['cid=5','name=jack']
       // 遍历进行第二次拆分
-      for (var i = 0; i < arr.length; i++){
+      for (var i = 0; i < arr.length; i++) {
         var temp = arr[i].split('=')//['cid',5]
-        obj[temp[0]]=temp[1] //obj['cid']=5
+        obj[temp[0]] = temp[1] //obj['cid']=5
         
       }
       return obj
     }
-  })
+  });
 
 
 
